@@ -5,6 +5,7 @@ import scprep
 import magic
 import pickle
 import graphtools
+import shutil
 
 
 def get_common_genes(sample_list):
@@ -81,5 +82,11 @@ del mg.graph._diff_op
 del mg.graph.subgraphs
 del mg.graph.sample_idx
 
+# The largest component is mg.X (>90% in my usage) (atong)
+mg.X = mg.X.astype('float32')
+
 with open('magic.pickle', 'wb') as handle:
     pickle.dump(mg, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open('magic.pickle', 'rb') as f_in, gzip.open('magic.pickle.gz', 'wb') as f_out:
+    shutil.copy_file_obj(f_in, f_out)

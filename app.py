@@ -1,6 +1,7 @@
 import json
 import numpy as np
 import pickle
+import gzip
 
 import matplotlib
 matplotlib.use('Agg')
@@ -26,8 +27,11 @@ phate2d_mat = np.load("{}Phate2d.npy".format(data_name))
 phate3d_mat = np.load("{}Phate3d.npy".format(data_name))
 
 # Load magic
-with open('magic.pickle', 'rb') as handle:
-    mg = pickle.load(handle)
+def load(filename):
+    f = gzip.GzipFile(filename, 'rb')
+    return pickle.load(f)
+
+mg = load('magic.pickle.gz')
 
 # Load gene names
 gene_names = np.sort(mg.X.columns).astype(np.str).tolist()
