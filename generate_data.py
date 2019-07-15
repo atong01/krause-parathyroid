@@ -9,6 +9,7 @@ import shutil
 import gzip
 
 
+"""
 def get_common_genes(sample_list):
     common_set = set(sample_list[0].columns.values.tolist())
     for s in sample_list[1:]:
@@ -61,7 +62,7 @@ mnn_graph = graphtools.Graph(data,
 
 phate_op = phate.PHATE(n_components=3,
                        random_state=42,
-                       knn_dist='precomputed', n_jobs=36)
+                       knn_dist='precomputed', n_jobs=36, gamma=0)
 mnn_data_phate_3d = phate_op.fit_transform(mnn_graph.K)
 phate_op.set_params(n_components=2)
 mnn_data_phate_2d = phate_op.fit_transform(mnn_graph.K)
@@ -87,6 +88,6 @@ mg.X = mg.X.astype('float32')
 
 with open('magic.pickle', 'wb') as handle:
     pickle.dump(mg, handle, protocol=pickle.HIGHEST_PROTOCOL)
-
+"""
 with open('magic.pickle', 'rb') as f_in, gzip.open('magic.pickle.gz', 'wb') as f_out:
-    shutil.copy_file_obj(f_in, f_out)
+    shutil.copyfileobj(f_in, f_out)
