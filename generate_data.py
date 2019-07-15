@@ -6,6 +6,7 @@ import magic
 import pickle
 import graphtools
 import shutil
+import gzip
 
 
 def get_common_genes(sample_list):
@@ -48,16 +49,15 @@ for sample in SAMPLE_NAMES[2:]:
     
 common_genes = get_common_genes(samples)
 samples = [s[common_genes] for s in samples]
-samples_norm = [scprep.normalize.library_size_normalize(s) for s in samples]
+samples_norm = [scprep.normalize.library_size_normalize(s, rescale=10000) for s in samples]
 samples_sqrt_norm = [scprep.transform.sqrt(s) for s in samples]
 data, sample_labels = scprep.utils.combine_batches(samples_sqrt_norm, SAMPLE_NAMES)
 data.astype('float32')
 
 mnn_graph = graphtools.Graph(data,
                              sample_idx=sample_labels,
-                             n_pca=100, knn=5,
-                             random_state=42,
-                             decay=15, kernel_symm='theta', theta=0.99)
+                             n_pca=100, 
+                             random_state=42)
 
 phate_op = phate.PHATE(n_components=3,
                        random_state=42,
