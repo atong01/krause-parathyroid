@@ -9,7 +9,6 @@ import shutil
 import gzip
 
 
-"""
 def get_common_genes(sample_list):
     common_set = set(sample_list[0].columns.values.tolist())
     for s in sample_list[1:]:
@@ -88,6 +87,5 @@ mg.X = mg.X.astype('float32')
 
 with open('magic.pickle', 'wb') as handle:
     pickle.dump(mg, handle, protocol=pickle.HIGHEST_PROTOCOL)
-"""
 with open('magic.pickle', 'rb') as f_in, gzip.open('magic.pickle.gz', 'wb') as f_out:
     shutil.copyfileobj(f_in, f_out)
