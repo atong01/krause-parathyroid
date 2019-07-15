@@ -199,7 +199,7 @@ app.layout = html.Div([
     ], style={'clear': 'both', 'margin-top': '20px'}),
     # Attribution
     html.Div([
-        html.P('Created by Scott Gigante and Kristina Yim',
+        html.P('Created by the Krishnaswamy Lab',
                style={'color': '#CCC'})
     ]),
     # Hidden elements for storing values

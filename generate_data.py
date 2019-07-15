@@ -50,7 +50,7 @@ for sample in SAMPLE_NAMES[2:]:
 common_genes = get_common_genes(samples)
 samples = [s[common_genes] for s in samples]
 samples_norm = [scprep.normalize.library_size_normalize(s, rescale=10000) for s in samples]
-samples_sqrt_norm = [scprep.transform.sqrt(s) for s in samples]
+samples_sqrt_norm = [scprep.transform.sqrt(s) for s in samples_norm]
 data, sample_labels = scprep.utils.combine_batches(samples_sqrt_norm, SAMPLE_NAMES)
 data.astype('float32')
 
